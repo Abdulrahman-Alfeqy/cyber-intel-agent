@@ -26,7 +26,8 @@
 The **Cyber-Intel AI Agent** acts as an autonomous tier-1 security analyst. The architecture utilizes a powerful reasoning loop:
 
 1. **Policy Grounding:** The agent first retrieves static corporate security policies from **Foundry IQ** (Azure AI Search index). This ensures that the agent understands *how* the company handles specific threats before taking action.
-2. **Live Threat Intelligence:** Utilizing a human-in-the-loop **FastMCP** tool via SSE/streamable-http, the agent reaches out to a local intelligence server to check live IP threat scores and malware hashes.
+2. **Live Threat Intelligence:** The Azure Agent routes real-time IP/Malware queries to the local FastMCP server via a Zero-Trust Cloudflare Tunnel using SSE/streamable-http.  
+`[Azure Agent] --(HTTPS + Service Token)--> [Cloudflare Endpoint] --(Encrypted Tunnel)--> [Local FastMCP]`
 3. **Reasoning & Execution:** The agent synthesizes the static policy directives with the live threat intelligence to determine the necessary actions.
 4. **Human-in-the-Loop:** Critical actions require explicit analyst approval via the terminal before the agent proceeds.
 
